@@ -8,20 +8,20 @@ using std::string;
 const string author = "Bui";
 const string version = "1.0d";
 const int maxCallerArgumentAndReturnCommandOrData = 900;
-WinampCommunicator winamp;
+winamp_communicator winamp_instance;
 
 #pragma region Winamp
 MIRCTOOLS_API MIRC_FUNCTION(GetWinamp) {
 	int msg = atoi(caller_argument_and_return_command_or_data);
 	try {
 		switch (msg) {
-			case 1: lstrcpy(caller_argument_and_return_command_or_data, winamp.getTitle()); break;
-			case 2: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp.getAction(WinampInfoPairs::TrackCount)); break;
-			case 3: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp.getAction(WinampInfoPairs::Kbps)); break;
-			case 4: wsprintf(caller_argument_and_return_command_or_data, "%li", winamp.getAction(WinampInfoPairs::TotalTrackTime)); break;
-			case 5: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp.getAction(WinampInfoPairs::CurrentPos)); break;
-			case 6: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp.getAction(WinampInfoPairs::Khz)); break;
-			case 7: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp.getAction(WinampInfoPairs::Mode)); break;
+			case 1: lstrcpy(caller_argument_and_return_command_or_data, winamp_instance.get_title()); break;
+			case 2: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::TrackCount)); break;
+			case 3: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::Kbps)); break;
+			case 4: wsprintf(caller_argument_and_return_command_or_data, "%li", winamp_instance.get_action(winamp::info_pairs::TotalTrackTime)); break;
+			case 5: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::CurrentPos)); break;
+			case 6: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::Khz)); break;
+			case 7: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::Mode)); break;
 		}
 	}
 	catch (std::runtime_error) {
@@ -34,18 +34,18 @@ MIRCTOOLS_API MIRC_FUNCTION(SendWinamp) {
 	int msg = atoi(caller_argument_and_return_command_or_data);
 	try {
 		switch (msg) {
-			case 1: winamp.sendAction(WinampCommands::Play); break;
-			case 2: winamp.sendAction(WinampCommands::Next); break;
-			case 3: winamp.sendAction(WinampCommands::Last); break;
-			case 4: winamp.sendAction(WinampCommands::Pause); break;
-			case 5: winamp.sendAction(WinampCommands::Stop); break;
-			case 6: winamp.sendAction(WinampCommands::FadeStop); break;
-			case 7: winamp.sendAction(WinampCommands::FastForward); break;
-			case 8: winamp.sendAction(WinampCommands::Rewind); break;
-			case 9: winamp.sendAction(WinampCommands::Kill); break;
-			case 10: winamp.sendAction(WinampCommands::FileDialog); break;
-			case 11: winamp.sendAction(WinampCommands::TimeDialog); break;
-			case 12: winamp.sendAction(WinampCommands::Vis); break;
+			case 1: winamp_instance.send_action(winamp::commands::play); break;
+			case 2: winamp_instance.send_action(winamp::commands::next); break;
+			case 3: winamp_instance.send_action(winamp::commands::last); break;
+			case 4: winamp_instance.send_action(winamp::commands::pause); break;
+			case 5: winamp_instance.send_action(winamp::commands::stop); break;
+			case 6: winamp_instance.send_action(winamp::commands::fade_stop); break;
+			case 7: winamp_instance.send_action(winamp::commands::fast_forward); break;
+			case 8: winamp_instance.send_action(winamp::commands::rewind); break;
+			case 9: winamp_instance.send_action(winamp::commands::kill); break;
+			case 10: winamp_instance.send_action(winamp::commands::file_dialog); break;
+			case 11: winamp_instance.send_action(winamp::commands::time_dialog); break;
+			case 12: winamp_instance.send_action(winamp::commands::vis); break;
 		}
 	}
 	catch (std::runtime_error) {

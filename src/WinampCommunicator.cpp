@@ -1,24 +1,24 @@
 #include "stdafx.hpp"
 #include "WinampCommunicator.hpp"
 
-void WinampCommunicator::init() {
+void winamp_communicator::init() {
 	m_hwnd = FindWindow(_T("Winamp v1.x"), NULL);
 	if (!m_hwnd) {
 		throw std::runtime_error("Error: Unable to find Winamp");
 	}
 }
 
-void WinampCommunicator::sendAction(WPARAM wParam) {
+void winamp_communicator::send_action(WPARAM wParam) {
 	init();
 	SendMessage(m_hwnd, WM_COMMAND, wParam, NULL);
 }
 
-long long WinampCommunicator::getAction(const CommandPair &pair) {
+long long winamp_communicator::get_action(const winamp_command_pair &pair) {
 	init();
 	return SendMessage(m_hwnd, WM_USER, pair.w, pair.l);
 }
 
-LPCSTR WinampCommunicator::getTitle() {
+LPCSTR winamp_communicator::get_title() {
 	init();
 
 	char *p;
