@@ -11,27 +11,27 @@ const int maxCallerArgumentAndReturnCommandOrData = 900;
 WinampCommunicator winamp;
 
 #pragma region Winamp
-MIRCTOOLS_API MIRCFUNCTION(GetWinamp) {
-	int msg = atoi(callerArgumentAndReturnCommandOrData);
+MIRCTOOLS_API MIRC_FUNCTION(GetWinamp) {
+	int msg = atoi(caller_argument_and_return_command_or_data);
 	try {
 		switch (msg) {
-			case 1: lstrcpy(callerArgumentAndReturnCommandOrData, winamp.getTitle()); break;
-			case 2: wsprintf(callerArgumentAndReturnCommandOrData, "%d", winamp.getAction(WinampInfoPairs::TrackCount)); break;
-			case 3: wsprintf(callerArgumentAndReturnCommandOrData, "%d", winamp.getAction(WinampInfoPairs::Kbps)); break;
-			case 4: wsprintf(callerArgumentAndReturnCommandOrData, "%li", winamp.getAction(WinampInfoPairs::TotalTrackTime)); break;
-			case 5: wsprintf(callerArgumentAndReturnCommandOrData, "%d", winamp.getAction(WinampInfoPairs::CurrentPos)); break;
-			case 6: wsprintf(callerArgumentAndReturnCommandOrData, "%d", winamp.getAction(WinampInfoPairs::Khz)); break;
-			case 7: wsprintf(callerArgumentAndReturnCommandOrData, "%d", winamp.getAction(WinampInfoPairs::Mode)); break;
+			case 1: lstrcpy(caller_argument_and_return_command_or_data, winamp.getTitle()); break;
+			case 2: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp.getAction(WinampInfoPairs::TrackCount)); break;
+			case 3: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp.getAction(WinampInfoPairs::Kbps)); break;
+			case 4: wsprintf(caller_argument_and_return_command_or_data, "%li", winamp.getAction(WinampInfoPairs::TotalTrackTime)); break;
+			case 5: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp.getAction(WinampInfoPairs::CurrentPos)); break;
+			case 6: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp.getAction(WinampInfoPairs::Khz)); break;
+			case 7: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp.getAction(WinampInfoPairs::Mode)); break;
 		}
 	}
 	catch (std::runtime_error) {
-		lstrcpy(callerArgumentAndReturnCommandOrData, "Error: Unable to find Winamp");
+		lstrcpy(caller_argument_and_return_command_or_data, "Error: Unable to find Winamp");
 	}
-	return FilledCallerArgumentWithResult;
+	return filled_caller_argument_with_result;
 }
 
-MIRCTOOLS_API MIRCFUNCTION(SendWinamp) {
-	int msg = atoi(callerArgumentAndReturnCommandOrData);
+MIRCTOOLS_API MIRC_FUNCTION(SendWinamp) {
+	int msg = atoi(caller_argument_and_return_command_or_data);
 	try {
 		switch (msg) {
 			case 1: winamp.sendAction(WinampCommands::Play); break;
@@ -49,22 +49,22 @@ MIRCTOOLS_API MIRCFUNCTION(SendWinamp) {
 		}
 	}
 	catch (std::runtime_error) {
-		lstrcpy(callerArgumentAndReturnCommandOrData, "Error: Unable to find Winamp");
+		lstrcpy(caller_argument_and_return_command_or_data, "Error: Unable to find Winamp");
 	}
-	return FilledCallerArgumentWithResult;
+	return filled_caller_argument_with_result;
 }
 #pragma endregion
 
 #pragma region Windows
-MIRCTOOLS_API MIRCFUNCTION(GetActive) {
+MIRCTOOLS_API MIRC_FUNCTION(GetActive) {
 	HWND h = GetForegroundWindow();
 	char buff[901];
 	GetWindowText(h, buff, maxCallerArgumentAndReturnCommandOrData);
-	lstrcpy(callerArgumentAndReturnCommandOrData, buff);
-	return FilledCallerArgumentWithResult;
+	lstrcpy(caller_argument_and_return_command_or_data, buff);
+	return filled_caller_argument_with_result;
 }
 
-MIRCTOOLS_API MIRCFUNCTION(GetActiveProcess) {
+MIRCTOOLS_API MIRC_FUNCTION(GetActiveProcess) {
 	HWND h = GetForegroundWindow();
 	HMODULE hMod;
 	DWORD cbNeeded;
@@ -73,39 +73,39 @@ MIRCTOOLS_API MIRCFUNCTION(GetActiveProcess) {
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
 	if (hProcess != NULL) {
 		if (EnumProcessModulesEx(hProcess, &hMod, sizeof(hMod), &cbNeeded, LIST_MODULES_ALL)) {
-			GetModuleBaseName(hProcess, hMod, callerArgumentAndReturnCommandOrData, maxCallerArgumentAndReturnCommandOrData);
+			GetModuleBaseName(hProcess, hMod, caller_argument_and_return_command_or_data, maxCallerArgumentAndReturnCommandOrData);
 		}
 		else {
-			lstrcpy(callerArgumentAndReturnCommandOrData, "error");
+			lstrcpy(caller_argument_and_return_command_or_data, "error");
 		}
 	}
 	else {
-		lstrcpy(callerArgumentAndReturnCommandOrData, "unavailable");
+		lstrcpy(caller_argument_and_return_command_or_data, "unavailable");
 	}
 	CloseHandle(hProcess);
-	return FilledCallerArgumentWithResult;
+	return filled_caller_argument_with_result;
 }
 
-MIRCTOOLS_API MIRCFUNCTION(ActiveShowState) {
+MIRCTOOLS_API MIRC_FUNCTION(ActiveShowState) {
 	HWND h = GetForegroundWindow();
 	WINDOWPLACEMENT p;
 	p.length = sizeof(WINDOWPLACEMENT);
 	if (GetWindowPlacement(h, &p) && p.showCmd == SW_MAXIMIZE) {
-		lstrcpy(callerArgumentAndReturnCommandOrData, "1");
+		lstrcpy(caller_argument_and_return_command_or_data, "1");
 	}
 	else {
-		lstrcpy(callerArgumentAndReturnCommandOrData, "0");
+		lstrcpy(caller_argument_and_return_command_or_data, "0");
 	}
-	return FilledCallerArgumentWithResult;
+	return filled_caller_argument_with_result;
 }
 #pragma endregion
 
-MIRCTOOLS_API MIRCFUNCTION(Version) {
-	lstrcpy(callerArgumentAndReturnCommandOrData, version.c_str());
-	return FilledCallerArgumentWithResult;
+MIRCTOOLS_API MIRC_FUNCTION(Version) {
+	lstrcpy(caller_argument_and_return_command_or_data, version.c_str());
+	return filled_caller_argument_with_result;
 }
 
-MIRCTOOLS_API MIRCFUNCTION(Author) {
-	lstrcpy(callerArgumentAndReturnCommandOrData, author.c_str());
-	return FilledCallerArgumentWithResult;
+MIRCTOOLS_API MIRC_FUNCTION(Author) {
+	lstrcpy(caller_argument_and_return_command_or_data, author.c_str());
+	return filled_caller_argument_with_result;
 }

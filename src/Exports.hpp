@@ -20,15 +20,15 @@
 /* Do not forget to modify the .def file associated with the project if modifying code here */
 
 #pragma region Winamp
-MIRCTOOLS_API MIRCFUNCTION(GetWinamp);
-MIRCTOOLS_API MIRCFUNCTION(SendWinamp);
+MIRCTOOLS_API MIRC_FUNCTION(GetWinamp);
+MIRCTOOLS_API MIRC_FUNCTION(SendWinamp);
 #pragma endregion
 
 #pragma region Windows
-MIRCTOOLS_API MIRCFUNCTION(GetActive);
-MIRCTOOLS_API MIRCFUNCTION(GetActiveProcess);
-MIRCTOOLS_API MIRCFUNCTION(ActiveShowState);
+MIRCTOOLS_API MIRC_FUNCTION(GetActive);
+MIRCTOOLS_API MIRC_FUNCTION(GetActiveProcess);
+MIRCTOOLS_API MIRC_FUNCTION(ActiveShowState);
 #pragma endregion
 
-MIRCTOOLS_API MIRCFUNCTION(Version);
-MIRCTOOLS_API MIRCFUNCTION(Author);
+MIRCTOOLS_API MIRC_FUNCTION(Version);
+MIRCTOOLS_API MIRC_FUNCTION(Author);
