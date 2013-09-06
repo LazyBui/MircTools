@@ -18,6 +18,7 @@
     <ProjectGuid>{E0034345-BBF7-4427-9348-E1FF34A29366}</ProjectGuid>
     <RootNamespace>MircTools</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <ProjectName>mirc_tools</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release 64-bit|x64'" Label="Configuration">
@@ -63,8 +64,8 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release 64-bit|x64'">false</LinkIncremental>
     <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release 64-bit|x64'">$(ProgramW6432)\Microsoft SDKs\Windows\v6.0A\Lib\x64;$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSdkDir)lib\x64</LibraryPath>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release 64-bit|x64'">$(ProjectName)-$(PlatformName)</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)-$(PlatformName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectName)</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -75,7 +76,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>stdafx.hpp</PrecompiledHeaderFile>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
@@ -83,7 +84,7 @@
       <AdditionalDependencies>psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <Version>1.0</Version>
-      <ModuleDefinitionFile>MircTools-Win32.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>mirc_tools.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
@@ -111,7 +112,7 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <Version>1.0</Version>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <ModuleDefinitionFile>MircTools-Win32.def</ModuleDefinitionFile>
+      <ModuleDefinitionFile>mirc_tools.def</ModuleDefinitionFile>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
@@ -152,7 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\dllmain.cpp" />
-    <ClCompile Include="src\Exports.cpp" />
+    <ClCompile Include="src\exports.cpp" />
     <ClCompile Include="src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release 64-bit|x64'">Create</PrecompiledHeader>
@@ -160,17 +161,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.hpp</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\WinampCommunicator.cpp" />
+    <ClCompile Include="src\winamp_communicator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MircTools-Win32.def" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Exports.hpp" />
-    <ClInclude Include="src\MircFunction.hpp" />
+    <ClInclude Include="src\exports.hpp" />
+    <ClInclude Include="src\mirc_function.hpp" />
     <ClInclude Include="src\stdafx.hpp" />
     <ClInclude Include="src\targetver.hpp" />
-    <ClInclude Include="src\WinampCommunicator.hpp" />
+    <ClInclude Include="src\winamp_communicator.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

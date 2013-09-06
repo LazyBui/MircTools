@@ -15,20 +15,22 @@
 #	define MIRCTOOLS_API __declspec(dllimport)
 #endif
 
-#include "MircFunction.hpp"
+#include "mirc_function.hpp"
 
 /* Do not forget to modify the .def file associated with the project if modifying code here */
 
 #pragma region Winamp
-MIRCTOOLS_API MIRC_FUNCTION(GetWinamp);
-MIRCTOOLS_API MIRC_FUNCTION(SendWinamp);
+MIRCTOOLS_API MIRC_FUNCTION(get_winamp);
+MIRCTOOLS_API MIRC_FUNCTION(send_winamp);
 #pragma endregion
 
 #pragma region Windows
-MIRCTOOLS_API MIRC_FUNCTION(GetActive);
-MIRCTOOLS_API MIRC_FUNCTION(GetActiveProcess);
-MIRCTOOLS_API MIRC_FUNCTION(ActiveShowState);
+MIRCTOOLS_API MIRC_FUNCTION(get_active);
+MIRCTOOLS_API MIRC_FUNCTION(get_active_process);
+MIRCTOOLS_API MIRC_FUNCTION(active_show_state);
 #pragma endregion
 
-MIRCTOOLS_API MIRC_FUNCTION(Version);
-MIRCTOOLS_API MIRC_FUNCTION(Author);
+#pragma region Meta
+MIRCTOOLS_API MIRC_FUNCTION(version);
+MIRCTOOLS_API MIRC_FUNCTION(author);
+#pragma endregion

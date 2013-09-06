@@ -1,9 +1,0 @@
-LIBRARY mIRCtools-Win32
-EXPORTS
-	GetWinamp
-	SendWinamp
-	GetActive
-	GetActiveProcess
-	ActiveShowState
-	Version
-	Author

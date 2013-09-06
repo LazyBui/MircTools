@@ -21,10 +21,10 @@
     <ClCompile Include="src\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\WinampCommunicator.cpp">
+    <ClCompile Include="src\exports.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Exports.cpp">
+    <ClCompile Include="src\winamp_communicator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -34,19 +34,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Exports.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MircFunction.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\stdafx.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\targetver.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\WinampCommunicator.hpp">
+    <ClInclude Include="src\exports.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mirc_function.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\winamp_communicator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

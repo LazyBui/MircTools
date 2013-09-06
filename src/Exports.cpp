@@ -1,17 +1,17 @@
 #include "stdafx.hpp"
-#include "Exports.hpp"
-#include "MircFunction.hpp"
-#include "WinampCommunicator.hpp"
+#include "exports.hpp"
+#include "mirc_function.hpp"
+#include "winamp_communicator.hpp"
 
 using std::string;
 
-const string author = "Bui";
-const string version = "1.0d";
-const int maxCallerArgumentAndReturnCommandOrData = 900;
+const string author_string = "Bui";
+const string version_string = "1.0d";
+const int max_caller_argument_and_return_command_or_data = 900;
 winamp_communicator winamp_instance;
 
 #pragma region Winamp
-MIRCTOOLS_API MIRC_FUNCTION(GetWinamp) {
+MIRCTOOLS_API MIRC_FUNCTION(get_winamp) {
 	int msg = atoi(caller_argument_and_return_command_or_data);
 	try {
 		switch (msg) {
@@ -30,7 +30,7 @@ MIRCTOOLS_API MIRC_FUNCTION(GetWinamp) {
 	return filled_caller_argument_with_result;
 }
 
-MIRCTOOLS_API MIRC_FUNCTION(SendWinamp) {
+MIRCTOOLS_API MIRC_FUNCTION(send_winamp) {
 	int msg = atoi(caller_argument_and_return_command_or_data);
 	try {
 		switch (msg) {
@@ -56,15 +56,15 @@ MIRCTOOLS_API MIRC_FUNCTION(SendWinamp) {
 #pragma endregion
 
 #pragma region Windows
-MIRCTOOLS_API MIRC_FUNCTION(GetActive) {
+MIRCTOOLS_API MIRC_FUNCTION(get_active) {
 	HWND h = GetForegroundWindow();
 	char buff[901];
-	GetWindowText(h, buff, maxCallerArgumentAndReturnCommandOrData);
+	GetWindowText(h, buff, max_caller_argument_and_return_command_or_data);
 	lstrcpy(caller_argument_and_return_command_or_data, buff);
 	return filled_caller_argument_with_result;
 }
 
-MIRCTOOLS_API MIRC_FUNCTION(GetActiveProcess) {
+MIRCTOOLS_API MIRC_FUNCTION(get_active_process) {
 	HWND h = GetForegroundWindow();
 	HMODULE hMod;
 	DWORD cbNeeded;
@@ -73,7 +73,7 @@ MIRCTOOLS_API MIRC_FUNCTION(GetActiveProcess) {
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
 	if (hProcess != NULL) {
 		if (EnumProcessModulesEx(hProcess, &hMod, sizeof(hMod), &cbNeeded, LIST_MODULES_ALL)) {
-			GetModuleBaseName(hProcess, hMod, caller_argument_and_return_command_or_data, maxCallerArgumentAndReturnCommandOrData);
+			GetModuleBaseName(hProcess, hMod, caller_argument_and_return_command_or_data, max_caller_argument_and_return_command_or_data);
 		}
 		else {
 			lstrcpy(caller_argument_and_return_command_or_data, "error");
@@ -86,7 +86,7 @@ MIRCTOOLS_API MIRC_FUNCTION(GetActiveProcess) {
 	return filled_caller_argument_with_result;
 }
 
-MIRCTOOLS_API MIRC_FUNCTION(ActiveShowState) {
+MIRCTOOLS_API MIRC_FUNCTION(active_show_state) {
 	HWND h = GetForegroundWindow();
 	WINDOWPLACEMENT p;
 	p.length = sizeof(WINDOWPLACEMENT);
@@ -100,12 +100,14 @@ MIRCTOOLS_API MIRC_FUNCTION(ActiveShowState) {
 }
 #pragma endregion
 
-MIRCTOOLS_API MIRC_FUNCTION(Version) {
-	lstrcpy(caller_argument_and_return_command_or_data, version.c_str());
+#pragma region Meta
+MIRCTOOLS_API MIRC_FUNCTION(version) {
+	lstrcpy(caller_argument_and_return_command_or_data, version_string.c_str());
 	return filled_caller_argument_with_result;
 }
 
-MIRCTOOLS_API MIRC_FUNCTION(Author) {
-	lstrcpy(caller_argument_and_return_command_or_data, author.c_str());
+MIRCTOOLS_API MIRC_FUNCTION(author) {
+	lstrcpy(caller_argument_and_return_command_or_data, author_string.c_str());
 	return filled_caller_argument_with_result;
 }
+#pragma endregion
