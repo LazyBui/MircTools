@@ -1,5 +1,5 @@
 #include "stdafx.hpp"
-#include "WinampCommunicator.hpp"
+#include "winamp_communicator.hpp"
 
 void winamp_communicator::init() {
 	m_hwnd = FindWindow(_T("Winamp v1.x"), NULL);
