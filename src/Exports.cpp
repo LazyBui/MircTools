@@ -1,7 +1,7 @@
-#include "stdafx.h"
-#include "Exports.h"
-#include "MircFunction.h"
-#include "WinampCommunicator.h"
+#include "stdafx.hpp"
+#include "Exports.hpp"
+#include "MircFunction.hpp"
+#include "WinampCommunicator.hpp"
 
 using std::string;
 

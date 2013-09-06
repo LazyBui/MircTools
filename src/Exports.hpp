@@ -7,7 +7,7 @@
 // MIRCTOOLS_API functions as being imported from a DLL, whereas this DLL sees symbols
 // defined with this macro as being exported.
 
-#include "stdafx.h"
+#include "stdafx.hpp"
 
 #ifdef MIRCTOOLS_EXPORTS
 #	define MIRCTOOLS_API __declspec(dllexport)
@@ -15,7 +15,7 @@
 #	define MIRCTOOLS_API __declspec(dllimport)
 #endif
 
-#include "MircFunction.h"
+#include "MircFunction.hpp"
 
 /* Do not forget to modify the .def file associated with the project if modifying code here */
 

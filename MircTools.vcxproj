@@ -104,6 +104,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <PrecompiledHeaderFile>stdafx.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalDependencies>psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -157,19 +158,19 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release 64-bit|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release 64-bit|x64'">stdafx.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">stdafx.hpp</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\WinampCommunicator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Exports.h" />
-    <ClInclude Include="src\MircFunction.h" />
-    <ClInclude Include="src\stdafx.h" />
-    <ClInclude Include="src\targetver.h" />
-    <ClInclude Include="src\WinampCommunicator.h" />
+    <None Include="MircTools-Win32.def" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MircTools-Win32.def" />
+    <ClInclude Include="src\Exports.hpp" />
+    <ClInclude Include="src\MircFunction.hpp" />
+    <ClInclude Include="src\stdafx.hpp" />
+    <ClInclude Include="src\targetver.hpp" />
+    <ClInclude Include="src\WinampCommunicator.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
