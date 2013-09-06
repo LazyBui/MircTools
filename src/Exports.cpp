@@ -7,7 +7,7 @@ using std::string;
 
 const string author = "Bui";
 const string version = "1.0d";
-const int maxcallerArgumentAndReturnCommandOrData = 900;
+const int maxCallerArgumentAndReturnCommandOrData = 900;
 WinampCommunicator winamp;
 
 #pragma region Winamp
@@ -59,7 +59,7 @@ MIRCTOOLS_API MIRCFUNCTION(SendWinamp) {
 MIRCTOOLS_API MIRCFUNCTION(GetActive) {
 	HWND h = GetForegroundWindow();
 	char buff[901];
-	GetWindowText(h, buff, maxcallerArgumentAndReturnCommandOrData);
+	GetWindowText(h, buff, maxCallerArgumentAndReturnCommandOrData);
 	lstrcpy(callerArgumentAndReturnCommandOrData, buff);
 	return FilledCallerArgumentWithResult;
 }
@@ -73,7 +73,7 @@ MIRCTOOLS_API MIRCFUNCTION(GetActiveProcess) {
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
 	if (hProcess != NULL) {
 		if (EnumProcessModulesEx(hProcess, &hMod, sizeof(hMod), &cbNeeded, LIST_MODULES_ALL)) {
-			GetModuleBaseName(hProcess, hMod, callerArgumentAndReturnCommandOrData, maxcallerArgumentAndReturnCommandOrData);
+			GetModuleBaseName(hProcess, hMod, callerArgumentAndReturnCommandOrData, maxCallerArgumentAndReturnCommandOrData);
 		}
 		else {
 			lstrcpy(callerArgumentAndReturnCommandOrData, "error");
