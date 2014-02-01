@@ -16,12 +16,12 @@ MIRCTOOLS_API MIRC_FUNCTION(get_winamp) {
 	try {
 		switch (msg) {
 			case 1: lstrcpy(caller_argument_and_return_command_or_data, winamp_instance.get_title()); break;
-			case 2: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::TrackCount)); break;
-			case 3: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::Kbps)); break;
-			case 4: wsprintf(caller_argument_and_return_command_or_data, "%li", winamp_instance.get_action(winamp::info_pairs::TotalTrackTime)); break;
-			case 5: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::CurrentPos)); break;
-			case 6: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::Khz)); break;
-			case 7: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::Mode)); break;
+			case 2: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::track_count)); break;
+			case 3: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::kbps)); break;
+			case 4: wsprintf(caller_argument_and_return_command_or_data, "%li", winamp_instance.get_action(winamp::info_pairs::total_track_time)); break;
+			case 5: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::current_position)); break;
+			case 6: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::khz)); break;
+			case 7: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::mode)); break;
 		}
 	}
 	catch (std::runtime_error) {
@@ -66,9 +66,9 @@ MIRCTOOLS_API MIRC_FUNCTION(get_active) {
 
 MIRCTOOLS_API MIRC_FUNCTION(get_active_process) {
 	HWND h = GetForegroundWindow();
-	HMODULE hMod;
-	DWORD cbNeeded;
-	DWORD processId;
+	HMODULE hMod = nullptr;
+	DWORD cbNeeded = 0;
+	DWORD processId = 0;
 	GetWindowThreadProcessId(h, &processId);
 	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
 	if (hProcess != NULL) {

@@ -24,12 +24,12 @@ namespace winamp {
 	}
 
 	namespace info_pairs {
-		const winamp_command_pair TrackCount = {0, 124};
-		const winamp_command_pair Kbps = {1, 126};
-		const winamp_command_pair TotalTrackTime = {1, 105};
-		const winamp_command_pair CurrentPos = {0, 105};
-		const winamp_command_pair Khz = {0, 126};
-		const winamp_command_pair Mode = {2, 126};
+		const winamp_command_pair track_count = {0, 124};
+		const winamp_command_pair kbps = {1, 126};
+		const winamp_command_pair total_track_time = {1, 105};
+		const winamp_command_pair current_position = {0, 105};
+		const winamp_command_pair khz = {0, 126};
+		const winamp_command_pair mode = {2, 126};
 	}
 }
 
@@ -39,12 +39,13 @@ public:
 	// mIRC also performs its own loading/unloading
 	// This makes it unpredictable from the perspective of the DLL
 	// e.g. There's no guarantee of re-init every call
-	winamp_communicator() { }
-	void send_action(WPARAM);
-	long long get_action(const winamp_command_pair &);
-	LPCSTR get_title();
+	winamp_communicator() = default;
+	auto send_action(WPARAM) -> void;
+	auto get_action(const winamp_command_pair &) -> long long;
+	auto get_title() -> LPCSTR;
 private:
-	void init();
-	HWND m_hwnd;
+	auto init() -> void;
+
+	HWND m_hwnd = nullptr;
 	char m_title[900];
 };
