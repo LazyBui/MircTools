@@ -41,11 +41,8 @@ public:
 	// e.g. There's no guarantee of re-init every call
 	winamp_communicator() = default;
 	auto send_action(WPARAM) -> void;
-	auto get_action(const winamp_command_pair &) -> long long;
-	auto get_title() -> LPCSTR;
+	auto get_action(const winamp_command_pair &) -> LRESULT;
+	auto get_title() -> std::string;
 private:
-	auto init() -> void;
-
-	HWND m_hwnd = nullptr;
-	char m_title[900];
+	auto init() -> HWND;
 };

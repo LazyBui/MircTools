@@ -1,39 +1,46 @@
 #include "stdafx.hpp"
 #include "winamp_communicator.hpp"
+#include "mirc_function.hpp"
 
-auto winamp_communicator::init() -> void {
-	m_hwnd = FindWindow(_T("Winamp v1.x"), NULL);
-	if (!m_hwnd) {
+auto winamp_communicator::init() -> HWND {
+	HWND window_handle = FindWindow(_T("Winamp v1.x"), NULL);
+	if (!window_handle) {
 		throw std::runtime_error("Error: Unable to find Winamp");
 	}
+	return window_handle;
 }
 
-auto winamp_communicator::send_action(WPARAM wParam) -> void {
-	init();
-	SendMessage(m_hwnd, WM_COMMAND, wParam, NULL);
+auto winamp_communicator::send_action(WPARAM w_param) -> void {
+	HWND window_handle = init();
+	SendMessage(window_handle, WM_COMMAND, w_param, NULL);
 }
 
-auto winamp_communicator::get_action(const winamp_command_pair &pair) -> long long {
-	init();
-	return SendMessage(m_hwnd, WM_USER, pair.w, pair.l);
+auto winamp_communicator::get_action(const winamp_command_pair &pair) -> LRESULT {
+	HWND window_handle = init();
+	return SendMessage(window_handle, WM_USER, pair.w, pair.l);
 }
 
-auto winamp_communicator::get_title() -> LPCSTR {
-	init();
+auto winamp_communicator::get_title() -> std::string {
+	HWND window_handle = init();
+	char title[max_caller_argument_and_return_command_or_data];
+	GetWindowText(window_handle, title, sizeof(title));
 
-	char *p;
-	GetWindowText(m_hwnd, m_title, sizeof(m_title));
-	p = m_title + lstrlen(m_title) - 8;
-	while (p >= m_title) {
-		if (!lstrcmpi(p,"- Winamp"))
+	static std::string ending = "- Winamp";
+	char *p = title + lstrlen(title) - ending.length();
+	while (p >= title) {
+		if (!lstrcmpi(p, ending.c_str())) {
 			break;
+		}
 		p--;
 	}
-	if (p >= m_title)
+	if (p >= title) {
 		p--;
-	while (p >= m_title && *p == ' ')
+	}
+	while (p >= title && *p == ' ') {
 		p--;
+	}
+
 	*++p = 0;
 
-	return m_title;
+	return std::string{title};
 }

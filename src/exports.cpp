@@ -6,8 +6,7 @@
 using std::string;
 
 const string author_string = "Bui";
-const string version_string = "1.0d";
-const int max_caller_argument_and_return_command_or_data = 900;
+const string version_string = "1.0e";
 winamp_communicator winamp_instance;
 
 #pragma region Winamp
@@ -15,7 +14,7 @@ MIRCTOOLS_API MIRC_FUNCTION(get_winamp) {
 	int msg = atoi(caller_argument_and_return_command_or_data);
 	try {
 		switch (msg) {
-			case 1: lstrcpy(caller_argument_and_return_command_or_data, winamp_instance.get_title()); break;
+			case 1: lstrcpy(caller_argument_and_return_command_or_data, winamp_instance.get_title().c_str()); break;
 			case 2: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::track_count)); break;
 			case 3: wsprintf(caller_argument_and_return_command_or_data, "%d", winamp_instance.get_action(winamp::info_pairs::kbps)); break;
 			case 4: wsprintf(caller_argument_and_return_command_or_data, "%li", winamp_instance.get_action(winamp::info_pairs::total_track_time)); break;
@@ -57,23 +56,23 @@ MIRCTOOLS_API MIRC_FUNCTION(send_winamp) {
 
 #pragma region Windows
 MIRCTOOLS_API MIRC_FUNCTION(get_active) {
-	HWND h = GetForegroundWindow();
+	HWND current_window = GetForegroundWindow();
 	char buff[901];
-	GetWindowText(h, buff, max_caller_argument_and_return_command_or_data);
+	GetWindowText(current_window, buff, max_caller_argument_and_return_command_or_data);
 	lstrcpy(caller_argument_and_return_command_or_data, buff);
 	return filled_caller_argument_with_result;
 }
 
 MIRCTOOLS_API MIRC_FUNCTION(get_active_process) {
-	HWND h = GetForegroundWindow();
-	HMODULE hMod = nullptr;
-	DWORD cbNeeded = 0;
-	DWORD processId = 0;
-	GetWindowThreadProcessId(h, &processId);
-	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
-	if (hProcess != NULL) {
-		if (EnumProcessModulesEx(hProcess, &hMod, sizeof(hMod), &cbNeeded, LIST_MODULES_ALL)) {
-			GetModuleBaseName(hProcess, hMod, caller_argument_and_return_command_or_data, max_caller_argument_and_return_command_or_data);
+	HWND current_window = GetForegroundWindow();
+	HMODULE module_handle = nullptr;
+	DWORD bytes_needed = 0;
+	DWORD current_process_id = 0;
+	GetWindowThreadProcessId(current_window, &current_process_id);
+	HANDLE process_handle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, current_process_id);
+	if (process_handle != NULL) {
+		if (EnumProcessModulesEx(process_handle, &module_handle, sizeof(module_handle), &bytes_needed, LIST_MODULES_ALL)) {
+			GetModuleBaseName(process_handle, module_handle, caller_argument_and_return_command_or_data, max_caller_argument_and_return_command_or_data);
 		}
 		else {
 			lstrcpy(caller_argument_and_return_command_or_data, "error");
@@ -82,15 +81,15 @@ MIRCTOOLS_API MIRC_FUNCTION(get_active_process) {
 	else {
 		lstrcpy(caller_argument_and_return_command_or_data, "unavailable");
 	}
-	CloseHandle(hProcess);
+	CloseHandle(process_handle);
 	return filled_caller_argument_with_result;
 }
 
 MIRCTOOLS_API MIRC_FUNCTION(active_show_state) {
-	HWND h = GetForegroundWindow();
+	HWND current_window = GetForegroundWindow();
 	WINDOWPLACEMENT p;
 	p.length = sizeof(WINDOWPLACEMENT);
-	if (GetWindowPlacement(h, &p) && p.showCmd == SW_MAXIMIZE) {
+	if (GetWindowPlacement(current_window, &p) && p.showCmd == SW_MAXIMIZE) {
 		lstrcpy(caller_argument_and_return_command_or_data, "1");
 	}
 	else {
