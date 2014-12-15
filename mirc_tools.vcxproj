@@ -164,14 +164,14 @@
     <ClCompile Include="src\winamp_communicator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MircTools-Win32.def" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="src\exports.hpp" />
     <ClInclude Include="src\mirc_function.hpp" />
     <ClInclude Include="src\stdafx.hpp" />
     <ClInclude Include="src\targetver.hpp" />
     <ClInclude Include="src\winamp_communicator.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mirc_tools.def" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

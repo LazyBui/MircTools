@@ -29,11 +29,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="MircTools-Win32.def">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="src\stdafx.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -49,5 +44,8 @@
     <ClInclude Include="src\winamp_communicator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mirc_tools.def" />
   </ItemGroup>
 </Project>
