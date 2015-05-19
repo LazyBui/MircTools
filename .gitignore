@@ -13,9 +13,10 @@
 *.a
 
 # Visual Studio files
-Debug
-Release
-ipch
+Debug/
+Release/
+ipch/
+.vs/
 *.suo
 *.user
 *.sdf
